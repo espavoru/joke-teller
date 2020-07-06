@@ -95,6 +95,21 @@ const VoiceRSS = {
   }
 };
 
+// Passing Joke to VoicRSS API
+function tellMe(joke) {
+  console.log("tell me", joke);
+  // VoiceRSS Speech Parameters
+  VoiceRSS.speech({
+    key: "e985f868e96c46d9b0789c3855350152",
+    src: joke,
+    hl: "en-us",
+    r: 0,
+    c: "mp3",
+    f: "44khz_16bit_stereo",
+    ssml: false
+  });
+}
+
 // Get Jokes from Joke API
 async function getJokes() {
   let joke = "";
@@ -109,7 +124,7 @@ async function getJokes() {
       joke = data.joke;
     }
 
-    console.log(joke);
+    tellMe(joke);
   } catch (error) {
     // Catch Errors
     console.log("Whoops", error);
