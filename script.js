@@ -94,3 +94,26 @@ const VoiceRSS = {
     throw "The browser does not support HTTP request";
   }
 };
+
+// Get Jokes from Joke API
+async function getJokes() {
+  let joke = "";
+  const apiUrl =
+    "https://sv443.net/jokeapi/v2/joke/Any?blacklistFlags=nsfw,racist,sexist";
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    if (data.setup) {
+      joke = `${data.setup} ... ${data.delivery}`;
+    } else {
+      joke = data.joke;
+    }
+
+    console.log(joke);
+  } catch (error) {
+    // Catch Errors
+    console.log("Whoops", error);
+  }
+}
+
+getJokes();
